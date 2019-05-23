@@ -1,0 +1,135 @@
+common\models\Users
+common\models\UsersSearch
+backend\controllers\UsersController
+@backend/views/users
+
+
+common\models\Transactions
+common\models\TransactionsSearch
+frontend\controllers\TransactionsController
+@frontend/views/transactions
+
+
+
+common\models\ExchangeRates
+common\models\ExchangeRatesSearch
+frontend\controllers\ExchangeRatesController
+@frontend/views/exchange-rates
+
+
+common\models\UsersWallets
+common\models\UsersWalletsSearch
+frontend\controllers\UsersWalletsController
+@frontend/views/users-wallets
+
+
+
+
+Form Generator
+frontend/views/UsersWallets/currency-exchangeForm
+common\models\UsersWallets
+@frontend/views/users-wallets
+
+
+
+Extension Generator
+http://www.yiiframework.com/doc-2.0/guide-structure-extensions.html
+Vendor Name
+artembaranovsky
+Package Name
+yii2-get-currency-rates
+Namespace
+artembaranovsky\
+Type
+yii2-extension
+Title
+Extention to get currency rates
+Description
+Extention to get criptocurrency rates using API https://coinlayer.com
+Author Name
+Artem Baranovsky
+Author Email
+artem.baranovsky1980@gmail.com
+
+
+The extension has been generated successfully.
+
+To enable it in your application, you need to create a git repository and require it via composer.
+
+cd W:\domains\ewallet\frontend\runtime\tmp-extensions/yii2-get-currency-rates
+
+git init
+git add -A
+git commit
+git remote add origin https://path.to/your/repo
+git push -u origin master
+The next step is just for initial development, skip it if you directly publish the extension on packagist.org
+
+Add the newly created repo to your composer.json.
+
+"repositories":[
+    {
+        "type": "git",
+        "url": "https://path.to/your/repo"
+    }
+]
+Note: You may use the url file://W:\domains\ewallet\frontend\runtime\tmp-extensions/yii2-get-currency-rates for testing.
+
+Require the package with composer
+
+composer.phar require artembaranovsky/yii2-get-currency-rates:dev-master
+And use it in your application.
+
+\artembaranovsky\AutoloadExample::widget();
+When you have finished development register your extension at packagist.org.
+
+
+generated runtime\tmp-extensions\yii2-get-currency-rates\composer.json
+generated runtime\tmp-extensions\yii2-get-currency-rates\AutoloadExample.php
+generated runtime\tmp-extensions\yii2-get-currency-rates\README.md
+
+
+
+w:\domains\ewallet\common\config\main.php
+return [
+    'aliases' => [
+        '@bower' => '@vendor/bower-asset',
+        '@npm'   => '@vendor/npm-asset',
+		'@getCurrencyRates' => '@vendor/artembaranovsky/yii2-get-currency-rates',
+    ],
+    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'components' => [
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
+    ],
+];
+
+
+
+
+http://ewallet/backend/web/gii/module
+Module Generator
+This generator helps you to generate the skeleton code needed by a Yii module.
+Module Class 
+common\modules\GetCurrencyRates
+Module ID 
+yii2-get-currency-rates
+
+The module has been generated successfully.
+
+To access the module, you need to add this to your application configuration:
+
+
+    ......
+    'modules' => [
+        'yii2-get-currency-rates' => [
+            'class' => 'common\modules\GetCurrencyRates',
+        ],
+    ],
+    ......
+
+
+
+http://ewallet/backend/web/yii2-get-currency-rates
+
