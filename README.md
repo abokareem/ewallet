@@ -6,6 +6,55 @@
     <br>
 </p>
 
+<h1>  Test task for PHP Developer </h1>
+
+<p>Minimal application for exchange of cryptocurrencies<p>
+Entities: users, users wallets, exchange rates, transactions
+Currencies : USD, BTC, ETH, DOGE, LTC (you can choose any 4 cryptocurrencies instead of
+BTC, ETH, DOGE, LTC)
+User can
+- Register/Authorize
+- Create several wallets for any currency
+- Search a wallet by user’s email and currency
+- View wallets all info
+- Edit custom name of a wallet
+- Update cryptocurrency rates using API https://coinlayer.com and save those rates into the
+DB, through the Yii2 module creation
+- View and edit rates of cryptocurrencies , that have been received by API .
+Also, the application must have the option to block/unblock updating of a rate for each
+currency
+- Make a currency exchange form between wallets
+The exchange form contains next fields:
+● senders’ wallet,
+● recipients’ wallet recipient,
+● amount (currency of wallet-sender),
+- display the amount in currency of wallet-recipient, in a currency of wallet-sender using
+ajax.
+- Implement the selection of wallets in form with Select2 .
+- View exchange-transactions history
+Columns:
+● Transaction ID,
+● Sender email,
+● Recipient email,
+● Currency of wallet-sender,
+● Currency of wallet-recipient,
+● Amount in currency of sender,
+● Amount in currency of recipient,
+● Wallet-sender custom name,
+● Wallet-recipient custom name
+Each column must have a search field in GridView.
+Prepare your app as follows:
+- Register 3 users
+- Create a migration to top up usd-wallets with 1000 USD per each of previously mentioned 3
+users.
+- Provide an UML-diagram of the DB structure.
+- Publish your application to any free hosting or be able to demonstrate it using TeamViewer
+from your local machine.
+
+Keywords: Yii2 advanced, CRUD, PostgreSQL, CoinLayer API, Ajax, Select2, CSS Bootstrap,
+Yii2 GridView, Yii2 Gii generator, Yii2 migration
+
+
 Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 developing complex Web applications with multiple tiers.
 
