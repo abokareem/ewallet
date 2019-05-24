@@ -6,6 +6,64 @@
     <br>
 </p>
 
+<h1>  Test task for PHP Developer </h1>
+
+<h2>Minimal application for exchange of cryptocurrencies</h2><br>
+<b>Entities:</b> users, users wallets, exchange rates, transactions. <br>
+<b>Currencies : USD, BTC, ETH, DOGE, LTC</b> (you can choose any 4 cryptocurrencies instead of
+BTC, ETH, DOGE, LTC) <br>
+<h3>User can</h3>
+<ul>
+<li> Register/Authorize </li>
+<li> Create several wallets for any currency </li>
+<li> Search a wallet by user’s email and currency</li>
+<li> View wallets all info</li>
+<li> Edit custom name of a wallet</li>
+<li> Update cryptocurrency rates using API https://coinlayer.com and save those rates into the
+DB, through the Yii2 module creation</li>
+<li> View and edit rates of cryptocurrencies , that have been received by API .
+Also, the application must have the option to block/unblock updating of a rate for each
+currency</li>
+<li> Make a currency exchange form between wallets</li>
+</ul><br>
+
+<h3>The exchange form contains next fields:</h3>
+<ul>
+<li> senders’ wallet,</li>
+<li> recipients’ wallet recipient,</li>
+<li> amount (currency of wallet-sender),</li>
+<li> display the amount in currency of wallet-recipient, in a currency of wallet-sender using
+ajax.</li>
+<li> Implement the selection of wallets in form with Select2 .</li>
+<li> View exchange-transactions history</li>
+</ul><br>
+
+<h3>Columns:</h3>
+<li> Transaction ID,</li>
+<li> Sender email,</li>
+<li> Recipient email,</li>
+<li> Currency of wallet-sender,</li>
+<li> Currency of wallet-recipient,</li>
+<li> Amount in currency of sender,</li>
+<li> Amount in currency of recipient,</li>
+<li> Wallet-sender custom name,</li>
+<li> Wallet-recipient custom name</li><br>
+
+<h2>Each column must have a search field in GridView.</h2>
+<p>Prepare your app as follows:</p>
+<ul>
+<li>Register 3 users</li>
+<li> Create a migration to top up usd-wallets with 1000 USD per each of previously mentioned 3
+users.</li>
+<li> Provide an UML-diagram of the DB structure.</li>
+<li> Publish your application to any free hosting or be able to demonstrate it using TeamViewer
+from your local machine.</li>
+</ul>
+
+<b>Keywords: Yii2 advanced, CRUD, PostgreSQL, CoinLayer API, Ajax, Select2, CSS Bootstrap,
+Yii2 GridView, Yii2 Gii generator, Yii2 migration</b>
+
+
 Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 developing complex Web applications with multiple tiers.
 
