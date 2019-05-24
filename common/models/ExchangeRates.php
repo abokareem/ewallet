@@ -77,25 +77,57 @@ class ExchangeRates extends \yii\db\ActiveRecord
         }  */ 
 
         $exchangeRates = new ExchangeRates();
-        $oldRates = $exchangeRates::find()
+        $exchangeRates = $exchangeRates::find()
             ->joinWith('currency c', false, 'RIGHT JOIN')
-            ->select([ 'name', /*'rate',*/ 'c.id as id'])
+            ->select([ 'name', 'rate', 'c.id as id'])
             ->asArray()
             ->all();
         unset($oldRates[0]);
+        $oldRates = $exchangeRates;
+        // exchangeRates::deleteAll();
 
+        $i=0;
+        if ($rates){        
+            foreach ($oldRates as $OldRate) {
+                if (array_search($oldRate['name'], 
+                        array_keys($rates)   )) {
+                    $rates[$i]['id'] = $oldRate['id'];
+                }
 
-        $exchangeRates::deleteAll();
-        $id = 1;
+            }
+        }
+// $rates = array(array_column($rates, null),
+//                         array_keys($rates));
+$i=0;
+foreach ($rates as $key => $rate) {
+    $newrates[] = [ 'id' => ++$i, 'rate' => $rates[$key],  'name' => $key]; 
+}
+       // $rates = array_column($rates, null);
+// var_dump("<pre>",array_column($rates, null), "</pre>");
+$rates = $newrates;
+// var_dump("<pre>", $newrate, "</pre>");
+
         foreach ($rates as $key => $rate) {
                 $exchangeRates = new ExchangeRates();
-                $exchangeRates->rate = $rate;
+// var_dump("<pre>", $rate, "</pre>");
+                exchangeRates::deleteAll('id=:id', ['id' => $rate['id']]);    // numeration from 1
+                $exchangeRates->rate = $rate['rate'];
                 // $exchangeRates->currency_id = $oldRates[$i]['id'];
-                $exchangeRates->currency_id = $id;
-                $exchangeRates->id = $id++;
-                $exchangeRates->save();
+                $exchangeRates->currency_id = $rate['id'];
+                $exchangeRates->id = $rate['id'];
+                if ($exchangeRates->validate()) {
+                    $exchangeRates->save();
+                }
         } 
-        return $oldRates;   //  удалить!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+        // foreach ($rates as $key => $rate) {
+        //         $exchangeRates = new ExchangeRates();
+        //         $exchangeRates->rate = $rate;
+        //         // $exchangeRates->currency_id = $oldRates[$i]['id'];
+        //         $exchangeRates->currency_id = $id;
+        //         $exchangeRates->id = $id++;
+        //         $exchangeRates->save();
+        // } 
+        // return $oldRates;   //  удалить!!!!!!!!!!!!!!!!!!!!!!!!!!! 
     }
 
     public function getName()
@@ -114,13 +146,13 @@ class ExchangeRates extends \yii\db\ActiveRecord
         // $lastRatesFromDB = ArrayHelper::map(ExchangeRates::find()->asArray(true)->all(), 'id', 'rate');
 
         $lastRatesFromDB = ExchangeRates::find()
-            ->join('INNER JOIN', 'currency', 'currency.id = exchange_rates.id')
+            ->join('RIGHT JOIN', 'currency', 'currency.id = exchange_rates.id')
             ->select([ 'name', 'rate'
                 // '{{exchange_rates}}.*', // получить все атрибуты валют
             ])
             ->asArray(true)
             ->all();
-
+            unset($lastRatesFromDB[0]);
 
         $updateTime = ExchangeRates::find()->asArray(true)/*->where(['id' => 1])*/->one();
         // return $lastRatesFromDB;

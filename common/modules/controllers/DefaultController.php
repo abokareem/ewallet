@@ -42,19 +42,28 @@ class DefaultController extends Controller
 
     public function actionGetApi(){
     		$model = new Currency;	//['\common\models']
-            $symbols = \Yii::$app->request->post('symbols');
-    		// $cryptoCurrencies = $model->getCurrencyTitles();
-    		// $symbols = implode(',', $cryptoCurrencies);//	 multiple (comma-separated) e.g. BTC,DOGE
-            $currency_url = "http://api.coinlayer.com/api/live?access_key=9ffa18a3de7467e66273f6e7484fb746&target=USD&symbols={$symbols}";
-    		// $currency_url = "http://api.coinlayer.com/api/live?access_key=2662d865660f33044d955b13e1502011&target=USD&symbols={$symbols}";
-				$content = file_get_contents($currency_url);
-				$d = json_decode($content, true);
-
-				
-				$rates =  (array_column($d['rates'], null));	// сохраняем ассоциативный массив без ключей				
-				/*$oldRates = */ExchangeRates::saveLastRates($rates);
-				$d = ['timestamp' =>$d['timestamp'], 'rates' => $d['rates']/*, 'oldRates' => $oldRates*/];
-				return json_encode($d);
+            $listCurrenciesToUpdate = \Yii::$app->request->post('symbols');
+    		$cryptoCurrencies = $model->getCurrencyTitles();
+            // die(var_dump( $listCurrenciesToUpdate));
+            // die(var_dump( $cryptoCurrencies));
+            if ($listCurrenciesToUpdate) {
+                $cryptoCurrencies = $listCurrenciesToUpdate;
+                // (!is_null($listCurrenciesToUpdate)) ? array_diff($cryptoCurrencies, $listCurrenciesToUpdate) : $cryptoCurrencies;
+                // var_dump($listCurrenciesToUpdate);
+                $symbols = implode(',', $cryptoCurrencies);//    multiple (comma-separated) e.g. BTC,DOGE
+                $currency_url = "http://api.coinlayer.com/api/live?access_key=9ffa18a3de7467e66273f6e7484fb746&target=USD&symbols={$symbols}";
+                // echo  $currency_url;
+                // $currency_url = "http://api.coinlayer.com/api/live?access_key=2662d865660f33044d955b13e1502011&target=USD&symbols={$symbols}";
+                    $content = file_get_contents($currency_url);
+                    $d = json_decode($content, true);
+    				
+                    // $rates =  (array_column($d['rates'], null));    // сохраняем ассоциативный массив без ключей                
+    				$rates =  $d['rates'];	// сохраняем ассоциативный массив без ключей				
+    				/*$oldRates = */ExchangeRates::saveLastRates($rates);
+    				$d = ['timestamp' =>$d['timestamp'], 'rates' => $d['rates']/*, 'oldRates' => $oldRates*/ ];
+    				return json_encode($d);
+            }
+            return;
     }
 
 
