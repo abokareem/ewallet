@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Transactions', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create transaction/exchange', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php //yii\helpers\VarDumper::dump($searchModel , 10, true); ?>
 
@@ -103,11 +103,19 @@ $this->params['breadcrumbs'][] = $this->title;
         //         },
         //   ],
 
-    ['class' => 'yii\grid\ActionColumn',
+        ['class' => 'yii\grid\ActionColumn',
             'header'=>'Actions', 
             'headerOptions' => ['width' => '50'],
-            'template' => '{view} {link}',
-    ],
+                // 'template' => '{view} {delete} {update}',
+                // 'controller' => 'imgs',
+                'visibleButtons' => [
+                    'view' => true,             
+                    'delete' => function ($model) {
+                        return  \Yii::$app->user->identity->id == $model->senderWallet->users_id; },
+                    'update' => function ($model) {
+                        return  \Yii::$app->user->identity->id == $model->senderWallet->users_id; },
+                ],        
+        ],
     ],
 ]);
 ?>

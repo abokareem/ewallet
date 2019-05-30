@@ -20,7 +20,23 @@ return [
             'class' => 'common\modules\GetCurrencyRates',
         ],
     ],
-    'components' => [
+    'components' => [  
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+                        // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+            'viewPath' => '@common/mailer',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'testewallet940@gmail.com',
+                'password' => 'test123+',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],

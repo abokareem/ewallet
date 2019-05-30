@@ -72,6 +72,4 @@ class Currency extends \yii\db\ActiveRecord
     }
 
 
-
-
 }

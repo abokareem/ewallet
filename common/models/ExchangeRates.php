@@ -16,6 +16,8 @@ use yii\db\QueryBuilder;
  */
 class ExchangeRates extends \yii\db\ActiveRecord
 {
+    public $name;
+    public $currency_name;
     /**
      * {@inheritdoc}
      */
@@ -31,7 +33,8 @@ class ExchangeRates extends \yii\db\ActiveRecord
     {
         return [
             [['rate'], 'number'],
-            // [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Currency::className(), 'targetAttribute' => ['id' => 'id']],
+            [['name', 'currency_name', 'update_time'], 'safe'],
+            [['id'], 'exist', 'skipOnError' => true, 'targetClass' => Currency::className(), 'targetAttribute' => ['id' => 'id']],
         ];
     }
 
@@ -79,7 +82,7 @@ class ExchangeRates extends \yii\db\ActiveRecord
         $exchangeRates = new ExchangeRates();
         $exchangeRates = $exchangeRates::find()
             ->joinWith('currency c', false, 'RIGHT JOIN')
-            ->select([ 'name', 'rate', 'c.id as id'])
+            ->select([ 'name', 'rate', 'c.id as id', 'c.block_change as block'])
             ->asArray()
             ->all();
         unset($oldRates[0]);

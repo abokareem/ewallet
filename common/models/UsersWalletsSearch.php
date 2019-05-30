@@ -14,13 +14,17 @@ class UsersWalletsSearch extends UsersWallets
     /**
      * {@inheritdoc}
      */
+    public $name;
     public $currencyname;
+    public $users_wallet;
+    public $useremail;
+
 
     public function rules()
     {
         return [
             [['id', 'users_id', 'currency_id'], 'integer'],
-            [['name', 'currencyname' , 'useremail'], 'safe'],
+            [['name', 'currencyname' , 'useremail',/* 'users_wallets'*/], 'safe'],
             [['amount'], 'number'],
         ];
     }
@@ -69,9 +73,23 @@ class UsersWalletsSearch extends UsersWallets
         // $query->joinWith(['currency c' => function($q) { $q->from(['c' => 'currency']); }]);
         $query->joinWith(['currency c']);
         $query->joinWith(['users u']);
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'users_wallets.name', $this->name]);
         $query->andFilterWhere(['like', 'c.name', $this->currencyname]);
         $query->andFilterWhere(['like', 'u.email', $this->useremail]);
+        // $query->andFilterWhere(['like', 'users_wallets.u.email', $this->users->email]);
+
+        $dataProvider->sort->attributes['users_wallets.name'] = [
+            'asc' => ['users_wallets.name' => SORT_ASC],
+            'desc' => ['users_wallets.name' => SORT_DESC],
+        ];
+        $dataProvider->sort->attributes['currencyname'] = [
+            'asc' => ['c.name' => SORT_ASC],
+            'desc' => ['c.name' => SORT_DESC],
+        ];
+        $dataProvider->sort->attributes['useremail'] = [
+            'asc' => ['u.email' => SORT_ASC],
+            'desc' => ['u.email' => SORT_DESC],
+        ];
 
 
         return $dataProvider;

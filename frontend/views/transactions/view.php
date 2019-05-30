@@ -56,16 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->recipientWallet->currency->name,
             ],
 
-            [ 
-                'label' => 'Sender`s wallet name',
-                'value' => $model->senderWallet->name,
-            ],
-
-            [ 
-                'label' => 'Recipient`s wallet name',
-                'value' => $model->senderWallet->name,
-            ],
-
             'timestamp',
         ],
     ]) ?>

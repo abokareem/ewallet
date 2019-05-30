@@ -194,10 +194,15 @@ class TransactionsController extends Controller
         $senderWallets =ArrayHelper::index(\common\models\UsersWallets::find()->select('users_wallets.*')/*->joinWith('currency')*/->leftJoin('currency', '`currency`.`id` = `users_wallets`.`currency_id`')->where('users_wallets.id=:id')->addParams([':id' => (int)Yii::$app->request->post('senderWalletId')])/*->where(['users_id' => \Yii::$app->user->identity->id])*/->asArray(true)->all(), 'id');
         
         $recipientWallet =ArrayHelper::index(\common\models\UsersWallets::find()->select('users_wallets.*')->joinWith(['currency' => function ($q) {
-      $q->from(['c' => Currency::tableName()]);  }])/*->leftJoin('currency', '`currency`.`id` = `users_wallets`.`currency_id`')*/->where('users_wallets.id=:id')->addParams([':id' => (int)Yii::$app->request->post('recipientWalletId')])->asArray(true)->all(), 'id');
-
+            $q->from(['c' => Currency::tableName()]);  }])/*->leftJoin('currency', '`currency`.`id` = `users_wallets`.`currency_id`')*/->where('users_wallets.id=:id')->addParams([':id' => (int)Yii::$app->request->post('recipientWalletId')])->asArray(true)->all(), 'id');
+        // $recipientWalletBalance = UsersWallets::findOne((int)Yii::$app->request->post('recipientWalletId'))->select('amount')->asArray(true);
+        $recipientWalletBalance = /*ArrayHelper::map*/(\common\models\UsersWallets::find($recipientWalletId)->asArray()->one()["amount"]/*->all()*//*, 'id', 'amount'*/);
+        // die(var_dump('<pre>', $recipientWalletBalance, '</pre>'));
         // return json_encode($senderWallets);
-        return json_encode(["senderWallets" => $senderWallets, 'recipientWallet' => $recipientWallet, "rates" => $rates]);
+                // $recipientWalletBalance = ArrayHelper::index(\common\models\UsersWallets::findOne((int)Yii::$app->request->post('recipientWalletId'))->select('amount')/*->joinWith(['currency' => function ($q) {
+            // $q->from(['c' => Currency::tableName()]);  }])*//*->leftJoin('currency', '`currency`.`id` = `users_wallets`.`currency_id`')*//*->where('users_wallets.id=:id')->addParams([':id' => ])*/->asArray(true), 'id');
+        // return json_encode($senderWallets);
+        return json_encode(["senderWallets" => $senderWallets, 'recipientWallet' => $recipientWallet, "rates" => $rates, 'recipientWalletBalance' => $recipientWalletBalance]);
     }
 
 

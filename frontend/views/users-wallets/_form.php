@@ -33,14 +33,14 @@ $items = ArrayHelper::map(common\models\Currency::find()->asArray(true)->all(), 
     <!-- // echo $form->field($model, 'status')->dropDownList($items,$params); -->
     <?= $form->field($model, 'currency_id')->dropDownList(
     	ArrayHelper::map(common\models\Currency::find()->asArray(true)->all(), 'id', 'name')
-    	, ['id', 'name'], ['prompt' => 'Choose criptocurrency']) ?>
+    	, ['id', 'name'], ['prompt' => 'Choose criptocurrency'])->label('Currency') ?>
 
-    <?= $form->field($model, 'currency')->textInput(['value' => $model->currency->name, ]) ?>
+    <?//= $form->field($model, 'currency')->textInput(['value' => $model->currency->name, ]) ?>
 
     <?= $form->field($model, 'users_id')->label(false)->hiddenInput(['value' => \Yii::$app->user->identity->id ]) ?>
     
     <?= $form->field($model, 'amount')->textInput() ?>
-
+    
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

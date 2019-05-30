@@ -37,11 +37,16 @@ class ExchangeRatesController extends Controller
     public function actionIndex()
     {
         $searchModel = new ExchangeRatesSearch();
+        // $searchModel->joinWith('currency');
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $modelCurrency = (new Currency)::find()
+            ->select([ 'name', 'id', 'block_change as block'])
+            ->asArray()
+            ->all();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'modelCurrency' => $modelCurrency,
         ]);
     }
 
@@ -68,12 +73,14 @@ class ExchangeRatesController extends Controller
         $model = new ExchangeRates();
         $modelCurrency = new Currency();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post('block_change')) && $model->save()) {
             return $this->redirect(['view', ['id' => $model->id, 'modelCurrency' => $modelCurrency]]);
         }
 
         return $this->render('create', [
             'model' => $model, 
+            'modelCurrency' => $modelCurrency,
+
         ]);
     }
 
@@ -87,13 +94,35 @@ class ExchangeRatesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        // ->join('currency')->select([ 'name', 'id', 'block_change as block']);
+        // $model->currencies = Currency::find()
+        //     ->select([ 'name', 'id', 'block_change as block'])
+        //     ->asArray()
+        //     ->all();
+        $modelCurrency = Currency::findOne($id);//->one();   //  Yii::$app->request->get('id')
+        // $modelCurrency = Currency::find()
+        //     ->select([ 'name', 'id', 'block_change as block'])
+        //     ->asArray()
+        //     ->all();
+        
+    if ($model->load(Yii::$app->request->post()) && $model->save() ) 
+        { 
+            // die(var_dump(\Yii::$app->request->post()));
+            $modelCurrency->block_change = Yii::$app->request->post(('Currency'))['block_change'];
+            $modelCurrency->save(); 
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+
+
+        // if (!$model->currency->block_change) {
+        //     Yii::$app->runAction('@getcurrencyrates/default/get-rates', ['id' => $model->id]);
+        //     // Yii::$app->runAction('yii2-get-currency-rates/default/get-rates/', ['id' => $model->id]);
+        // }
+
         return $this->render('update', [
             'model' => $model,
+            'modelCurrency' => $modelCurrency,
         ]);
     }
 

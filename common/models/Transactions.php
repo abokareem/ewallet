@@ -24,6 +24,8 @@ class Transactions extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $recipient_wallet_after_balance;
+
     public static function tableName()
     {
         return 'transactions';
@@ -41,7 +43,7 @@ class Transactions extends \yii\db\ActiveRecord
             [['timestamp'], 'safe'],
             [['sender_wallet_id'], 'exist', 'skipOnError' => true, 'targetClass' => UsersWallets::className(), 'targetAttribute' => ['sender_wallet_id' => 'id']],
             [['recipient_wallet_id'], 'exist', 'skipOnError' => true, 'targetClass' => UsersWallets::className(), 'targetAttribute' => ['recipient_wallet_id' => 'id']],
-            [['senderemail', 'recipientemail', 'senderwalletcurrency', 'recipientwalletcurrency', 'senderwalletname', 'recipientwalletname', 'senderwalletusersemail' ], 'safe'],
+            [['senderemail', 'recipientemail', 'senderwalletcurrency', 'recipientwalletcurrency', 'senderwalletname', 'recipientwalletname', 'senderwalletusersemail', 'recipient_wallet_after_balance' ], 'safe'],
         ];
     }
 
@@ -57,6 +59,7 @@ class Transactions extends \yii\db\ActiveRecord
             'sender_currency_amount' => 'Sender Currency Amount',
             'recipient_currency_amount' => 'Recipient Currency Amount',
             'timestamp' => 'Timestamp',
+            'recipient_wallet_after_balance' => 'Recipient`s wallet balance after transaction in sender wallet currency'
             // 'senderwalletname' => 'senderwalletname',
         ];
     }

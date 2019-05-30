@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="exchange-rates-view">
-
+<? // var_dump($model) ?>
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -29,8 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'name',
-            'rate',
+            [ 
+                'label' => 'Currency name',
+                'value' => $model->currency->name,
+            ],
+            [ 
+                'label' => 'Rate to USD',
+                'value' => $model->rate,
+            ],
+            [ 
+                'label' => 'Is blocked to update',
+                'value' => $model->currency->block_change,
+            ],
+            // 'rate',
         ],
     ]) ?>
 

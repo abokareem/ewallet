@@ -12,12 +12,17 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="exchange-rates-update">
 
+<?php  //yii\helpers\VarDumper::dump($model->currency->block_change, 10, true); ?>
+<?php  // yii\helpers\VarDumper::dump( Yii::$app->request->post(), 10, true); ?>
+<?php  //yii\helpers\VarDumper::dump($this, 10, true); ?>
     <h1><?= Html::encode($this->title) ?></h1>
-
+<?php //if (!$model->currency->block_change): ?>
+    
     <?= $this->render('_form', [
         'model' => $model,
-        'user' => $user,
-        'currency' => $currency, 
+        // 'user' => $user,
+        'modelCurrency' => $modelCurrency,
     ]) ?>
+<?php // endif; ?>
 
 </div>
