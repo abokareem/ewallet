@@ -64,6 +64,17 @@ from your local machine.</li>
 Yii2 GridView, Yii2 Gii generator, Yii2 migration</b>
 
 
+<br>
+
+<h1>How to use service</h1>
+<p>You could as <a href="login/">signup</a> as us existing users accounts:</p>
+<ul>
+    <li>login: <i>user1</i>; password: <i>test1@test.com</i></li>
+    <li>login: <i>user2</i>; password: <i>test2@test.com</i></li>
+    <li>login: <i>user3</i>; password: <i>test3@test.com</i></li>
+</ul>
+<img src="\frontend\web\images\СхемаБД.jpg" alt="">
+
 Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 developing complex Web applications with multiple tiers.
 
@@ -115,5 +126,4 @@ frontend
     widgets/             contains frontend widgets
 vendor/                  contains dependent 3rd-party packages
 environments/            contains environment-based overrides
-```
-"# ewallet" 
+
