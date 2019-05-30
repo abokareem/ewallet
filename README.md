@@ -73,7 +73,7 @@ Yii2 GridView, Yii2 Gii generator, Yii2 migration</b>
     <li>login: <i>user2</i>; password: <i>test2@test.com</i></li>
     <li>login: <i>user3</i>; password: <i>test3@test.com</i></li>
 </ul>
-<img src="\frontend\web\images\СхемаБД.jpg" alt="">
+<img src="https://github.com/ArtemBaranovsky/ewallet/blob/master/frontend/web/images/%D0%A1%D1%85%D0%B5%D0%BC%D0%B0%D0%91%D0%94.jpg" alt="">
 
 Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 developing complex Web applications with multiple tiers.
